@@ -34,35 +34,35 @@ app.get('/', (req, res) => {
 
 // Register API
 app.post('/register', async (req, res) => {
-    try {
-      const { name, email, password } = req.body;
-  
-      // Check if the user already exists
-      const existingUser = await User.findOne({ email });
-      console.log(existingUser);
-      if (existingUser) {
-        return res.status(402).json({ message: 'User already exists' });
-      }
-  
-      // Hash the password
-      const hashedPassword = await bcrypt.hash(password, 10);
-  
-      // Create a new user
-      const newUser = new User({
-        name,
-        email,
-        password: hashedPassword,
-      });
-  
-      // Save the user to the database
-      await newUser.save();
-      console.log(newUser);
-      res.status(201).json({ message: 'User registered successfully' });
-    } catch (error) {
-      console.error(error);
-      res.status(500).json({ message: 'Internal server error' });
+  try {
+    const { name, email, password } = req.body;
+
+    // Check if the user already exists
+    const existingUser = await User.findOne({ email });
+    console.log(existingUser);
+    if (existingUser) {
+      return res.status(402).json({ message: 'User already exists' });
     }
-  });
+
+    // Hash the password
+    const hashedPassword = await bcrypt.hash(password, 10);
+
+    // Create a new user
+    const newUser = new User({
+      name,
+      email,
+      password: hashedPassword,
+    });
+
+    // Save the user to the database
+    await newUser.save();
+    console.log(newUser);
+    res.status(201).json({data: newUser, message: "User Created Successfully"});
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Internal server error' });
+  }
+});
 
 // Login API
 app.post('/login', async (req, res) => {
@@ -90,7 +90,10 @@ app.post('/login', async (req, res) => {
 
 // Form Submission API (just a placeholder, you can modify it based on your form structure)
 app.post('/submit-form', (req, res) => {
-  console.log('Form data received:', req.body);
+  const {name, email}= req.body;
+  // const newSub = new User({
+
+  // })
   res.json({ message: 'Form submitted successfully' });
 });
 
