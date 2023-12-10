@@ -2,7 +2,7 @@
 const express = require('express');
 const cors = require('cors');
 const mongoose = require('mongoose');
-const bcrypt = require('bcrypt');
+// const bcrypt = require('bcrypt');
 const User = require('./models/User');
 require('dotenv').config();
 
@@ -45,13 +45,13 @@ app.post('/register', async (req, res) => {
     }
 
     // Hash the password
-    const hashedPassword = await bcrypt.hash(password, 10);
+    // const hashedPassword = await bcrypt.hash(password, 10);
 
     // Create a new user
     const newUser = new User({
       name,
       email,
-      password: hashedPassword,
+      password,
     });
 
     // Save the user to the database
