@@ -1,8 +1,4 @@
-// db.js
-//password:HKIeUTaE81ypOvgP
-//username:shrutipatel2688
-//mongodb+srv://shrutipatel2688:<password>@cluster0.ehf3cvw.mongodb.net/?retryWrites=true&w=majority
-// db.js
+
 const mongoose = require('mongoose');
 
 const connectDB = async () => {
