@@ -89,13 +89,20 @@ app.post('/login', async (req, res) => {
 });
 
 // Form Submission API (just a placeholder, you can modify it based on your form structure)
-app.post('/submit-form', (req, res) => {
+app.post('/submit-form', async(req, res) => {
   const {name, email}= req.body;
-  // const newSub = new User({
-
-  // })
-  res.json({ message: 'Form submitted successfully' });
+  const newSub = new User({
+    name,
+    email
+  })
+  await newSub.save();
+  res.status(201).json({data: newSub, message: "Form Submitted Succesfully"});
 });
+
+app.get('/getsub', async(req,res)=>{
+  const data = await User.find();
+  res.json(data);
+})
 
 // Start the server
 app.listen(PORT, () => {
