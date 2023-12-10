@@ -4,6 +4,7 @@ const cors = require('cors');
 const mongoose = require('mongoose');
 // const bcrypt = require('bcrypt');
 const User = require('./models/User');
+const Submission =  require('./models/Submission')
 require('dotenv').config();
 
 const app = express();
@@ -91,7 +92,7 @@ app.post('/login', async (req, res) => {
 // Form Submission API (just a placeholder, you can modify it based on your form structure)
 app.post('/submit-form', async(req, res) => {
   const {name, email}= req.body;
-  const newSub = new User({
+  const newSub = new Submission({
     name,
     email
   })
@@ -100,7 +101,7 @@ app.post('/submit-form', async(req, res) => {
 });
 
 app.get('/getsub', async(req,res)=>{
-  const data = await User.find();
+  const data = await Submission.find();
   res.json(data);
 })
 
